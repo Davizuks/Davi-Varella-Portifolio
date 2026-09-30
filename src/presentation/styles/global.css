@@ -1,0 +1,60 @@
+:root {
+  --ink: #000;
+  --paper: #fff;
+  --font-display: 'Familjen Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+  --font-mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-script: 'Inspiration', 'Snell Roundhand', cursive;
+  --gutter: 40px;
+  color-scheme: dark;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --gutter: 16px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
