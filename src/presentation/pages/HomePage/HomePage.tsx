@@ -1,3 +1,13 @@
+import { Header } from '@/presentation/components/Header/Header'
+import { Hero } from '@/presentation/components/Hero/Hero'
+
 export function HomePage() {
-  return <h1>Davi Varella</h1>
+  return (
+    <>
+      <Header />
+      <main id="topo">
+        <Hero />
+      </main>
+    </>
+  )
 }
