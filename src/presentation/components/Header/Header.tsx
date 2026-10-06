@@ -4,8 +4,8 @@ import { useLocalTime } from '@/presentation/hooks/useLocalTime'
 import styles from './Header.module.css'
 
 const NAV_ITEMS = [
-  { id: 'trabalhos', label: 'Trabalhos' },
   { id: 'sobre', label: 'Sobre' },
+  { id: 'trabalhos', label: 'Trabalhos' },
   { id: 'experiencia', label: 'Experiência' },
   { id: 'contato', label: 'Contato' },
 ]
@@ -101,7 +101,10 @@ export function Header() {
             </a>
           ))}
         </nav>
-        <p className={styles.sheetCta}>Vamos conversar.</p>
+        <a className={styles.sheetCta} href="#contato" onClick={closeMenu}>
+          Vamos conversar
+          <span aria-hidden="true">→</span>
+        </a>
         {menu !== 'closed' && <WaveLines />}
       </div>
     </>
