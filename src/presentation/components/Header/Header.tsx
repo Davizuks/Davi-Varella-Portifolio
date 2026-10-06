@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { WaveLines } from '@/presentation/components/WaveLines/WaveLines'
 import { useLocalTime } from '@/presentation/hooks/useLocalTime'
 import styles from './Header.module.css'
 
@@ -101,6 +102,7 @@ export function Header() {
           ))}
         </nav>
         <p className={styles.sheetCta}>Vamos conversar.</p>
+        {menu !== 'closed' && <WaveLines />}
       </div>
     </>
   )
