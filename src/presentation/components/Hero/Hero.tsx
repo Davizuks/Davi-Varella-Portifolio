@@ -14,6 +14,7 @@ export function Hero() {
   const [particleCount, setParticleCount] = useState<number | null>(null)
   const [playable, setPlayable] = useState(false)
   const [damage, setDamage] = useState(0)
+  const [paused, setPaused] = useState(false)
   const controls = useRef<GameControls>({
     up: false,
     down: false,
@@ -35,7 +36,7 @@ export function Hero() {
   }, [])
 
   return (
-    <section className={styles.hero} aria-label="Apresentação">
+    <section className={styles.hero} aria-label="Apresentação" data-paused={paused}>
       <ParticleField
         mapSrc={avatarDensityMap}
         meteorSrc={meteorDensityMap}
@@ -44,6 +45,7 @@ export function Hero() {
         onPlayable={onPlayable}
         onDamage={setDamage}
         onRestart={onRestart}
+        onPause={setPaused}
       />
 
       <span className={styles.caption}>
@@ -66,7 +68,9 @@ export function Hero() {
         <span className={styles.last}>Varella</span>
       </h1>
 
-      <span className={styles.scroll}>Role (↓)</span>
+      <span className={styles.scroll} data-paused={paused}>
+        {paused ? 'Pausado (↑)' : 'Role (↓)'}
+      </span>
       <span className={styles.edition}>Portfólio {CURRENT_YEAR}</span>
 
       {playable && <ShipControls onInput={onInput} onRebuild={onRebuild} damage={damage} />}
