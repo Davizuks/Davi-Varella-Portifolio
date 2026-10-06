@@ -24,8 +24,8 @@ export function loadImage(src: string): Promise<HTMLImageElement> {
   })
 }
 
-export function mobileGameHeight(viewportHeight: number): number {
-  return Math.round(Math.min(470, Math.max(340, viewportHeight * 0.56)))
+export function mobileGameHeight(viewportHeight: number, width: number): number {
+  return Math.round(Math.max(340, Math.min(viewportHeight * 0.56, width * 1.3)))
 }
 
 export function avatarBox(width: number, height: number, dpr: number, gameHeight: number): Box {

@@ -1,0 +1,7 @@
+.waves {
+  display: block;
+  width: calc(100% + 32px);
+  height: clamp(150px, 30svh, 260px);
+  margin: -36px -16px -24px;
+  pointer-events: none;
+}

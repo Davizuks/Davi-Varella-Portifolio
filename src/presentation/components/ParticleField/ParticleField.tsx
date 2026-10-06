@@ -68,6 +68,7 @@ type ParticleFieldProps = {
   onPlayable?: () => void
   onDamage?: (value: number) => void
   onRestart?: () => void
+  onPause?: (paused: boolean) => void
 }
 
 const CRASH_SHAKE = 0.8
@@ -76,6 +77,7 @@ const CRATER_FIRE = 1.8
 const INTRO_DONE = TIMELINE.rebuildStart + 2.4
 const SHIP_FALL_GRAVITY = 0.22
 const SHIP_FLOOR_GAP = 48
+const PAUSE_BELOW = 0.5
 const NOTHING_PRESSED: ShipInput = {
   up: false,
   down: false,
@@ -109,6 +111,7 @@ export function ParticleField({
   onPlayable,
   onDamage,
   onRestart,
+  onPause,
 }: ParticleFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const loaderRef = useRef<HTMLSpanElement>(null)
@@ -153,6 +156,8 @@ export function ParticleField({
     let frameId = 0
     let running = false
     let visible = true
+    let paused = false
+    let pausedAt = 0
     let disposed = false
 
     const shipMaxY = () =>
@@ -169,7 +174,7 @@ export function ParticleField({
       if (!maps) return
 
       const phone = isPhone(width)
-      gameHeight = phone ? mobileGameHeight(window.innerHeight) : height
+      gameHeight = phone ? mobileGameHeight(window.innerHeight, width) : height
       host.style.setProperty('--game-height', `${gameHeight}px`)
       const box = avatarBox(width, height, painter.dpr, gameHeight)
       const targets = avatarTargets(maps.avatar, box, phone)
@@ -367,18 +372,18 @@ export function ParticleField({
 
       render(t)
       report(t)
-      if (visible && !disposed) frameId = requestAnimationFrame(frame)
+      if (visible && !paused && !disposed) frameId = requestAnimationFrame(frame)
       else running = false
     }
 
     const start = () => {
-      if (reduceMotion || running || disposed) return
+      if (reduceMotion || running || paused || disposed) return
       running = true
       frameId = requestAnimationFrame(frame)
     }
 
     const setKey = (e: KeyboardEvent, down: boolean) => {
-      if (down && (!playing || !visible)) return
+      if (down && (!playing || !visible || paused)) return
       const target = e.target as HTMLElement | null
       if (target?.closest('input, textarea, select, [contenteditable="true"]')) return
       const key = KEYS[e.key]
@@ -412,12 +417,28 @@ export function ParticleField({
         : null
     resizeObserver?.observe(host)
 
+    const setPaused = (next: boolean) => {
+      if (next === paused || reduceMotion) return
+      paused = next
+      if (paused) {
+        pausedAt = performance.now()
+        Object.assign(controls.current, NOTHING_PRESSED)
+      } else {
+        startedAt += performance.now() - pausedAt
+      }
+      onPause?.(paused)
+    }
+
     const visibilityObserver =
       'IntersectionObserver' in window
-        ? new IntersectionObserver(([entry]) => {
-            visible = entry.isIntersecting
-            if (visible) start()
-          })
+        ? new IntersectionObserver(
+            ([entry]) => {
+              visible = entry.isIntersecting
+              setPaused(entry.intersectionRatio < PAUSE_BELOW)
+              if (visible) start()
+            },
+            { threshold: [0, PAUSE_BELOW] },
+          )
         : null
     visibilityObserver?.observe(host)
 
@@ -428,6 +449,7 @@ export function ParticleField({
         layout()
         const skip = new URLSearchParams(window.location.search).has('skip-intro')
         startedAt = performance.now() - (skip ? TIMELINE.shipArrive * 1000 : 0)
+        pausedAt = performance.now()
         start()
       })
       .catch(() => {})
@@ -445,7 +467,7 @@ export function ParticleField({
       host.removeEventListener('pointermove', onPointerMove)
       host.removeEventListener('pointerleave', onPointerLeave)
     }
-  }, [mapSrc, meteorSrc, controls, onReady, onPlayable, onDamage, onRestart])
+  }, [mapSrc, meteorSrc, controls, onReady, onPlayable, onDamage, onRestart, onPause])
 
   return (
     <>

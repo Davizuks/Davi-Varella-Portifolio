@@ -113,6 +113,30 @@
   grid-area: scroll;
 }
 
+.hero > canvas {
+  transition: opacity 0.3s steps(3);
+}
+
+.hero[data-paused='true'] > canvas {
+  opacity: 0.35;
+}
+
+.scroll[data-paused='true'] {
+  animation: blink 1.2s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll[data-paused='true'] {
+    animation: none;
+  }
+}
+
 .edition {
   grid-area: edition;
 }

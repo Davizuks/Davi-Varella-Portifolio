@@ -214,10 +214,23 @@
 }
 
 .sheetCta {
-  margin: 40px 0 0;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: auto;
+  padding-top: 24px;
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 34px;
+  text-decoration: none;
+}
+
+.sheetCta span {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 26px;
 }
 
 @media (prefers-reduced-motion: reduce) {
