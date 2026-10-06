@@ -169,7 +169,7 @@ export function ParticleField({
       if (!maps) return
 
       const phone = isPhone(width)
-      gameHeight = phone ? mobileGameHeight(window.innerHeight) : height
+      gameHeight = phone ? mobileGameHeight(window.innerHeight, width) : height
       host.style.setProperty('--game-height', `${gameHeight}px`)
       const box = avatarBox(width, height, painter.dpr, gameHeight)
       const targets = avatarTargets(maps.avatar, box, phone)

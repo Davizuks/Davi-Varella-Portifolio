@@ -145,11 +145,15 @@
     display: contents;
   }
 
+  .controls {
+    --cell: clamp(44px, 5.2svh, 64px);
+  }
+
   .pad {
     grid-column: 1;
     grid-row: 1;
-    grid-template-columns: repeat(3, 44px);
-    grid-template-rows: repeat(3, 44px);
+    grid-template-columns: repeat(3, var(--cell));
+    grid-template-rows: repeat(3, var(--cell));
     gap: 0;
   }
 
@@ -160,8 +164,8 @@
   .fire {
     grid-column: 3;
     grid-row: 1;
-    width: 88px;
-    height: 88px;
+    width: calc(var(--cell) * 2);
+    height: calc(var(--cell) * 2);
     padding: 0;
     font-size: 13px;
   }
