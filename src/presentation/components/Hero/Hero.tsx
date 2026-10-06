@@ -54,7 +54,10 @@ export function Hero() {
       </span>
 
       <div className={styles.copy}>
-        <p className={styles.bio}>Desenvolvedor full stack. O que me move é construir coisas.</p>
+        <p className={styles.bio}>
+          Full Stack Software Engineer.
+          <br />O que me cativa é construir coisas.
+        </p>
         {playable && <span className={styles.hint}>↳ pilote a nave para destruir o avatar</span>}
       </div>
 
