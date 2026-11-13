@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useNowPlaying } from '@/presentation/hooks/useNowPlaying'
-import { CREDITS, formatFrequency, stationAt, STATIONS } from './contact'
+import { CREDITS, DEFAULT_FREQUENCY, formatFrequency, stationAt } from './contact'
 import styles from './Contact.module.css'
 import { EmailLink } from './EmailLink'
 import { RadioDial } from './RadioDial'
 
 export function Contact() {
-  const [frequency, setFrequency] = useState(STATIONS[0].frequency)
+  const [frequency, setFrequency] = useState(DEFAULT_FREQUENCY)
   const listening = useNowPlaying()
   const tuned = stationAt(frequency)
   const readout = (

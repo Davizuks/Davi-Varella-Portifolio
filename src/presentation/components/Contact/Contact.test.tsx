@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { Contact } from './Contact'
-import { EMAIL, formatFrequency, stationAt, STATIONS } from './contact'
+import { EMAIL, stationAt, STATIONS } from './contact'
 
 const card = (artist: string, song: string) => ({
   ok: true,
@@ -33,7 +33,7 @@ describe('Contact', () => {
 
   it('tunes every station and hisses in between', () => {
     render(<Contact />)
-    for (const station of STATIONS.slice(1)) {
+    for (const station of STATIONS.filter((s) => s.id !== 'email')) {
       fireEvent.change(dial(), { target: { value: String(station.frequency) } })
       expect(screen.getByRole('link', { name: new RegExp(station.text) })).toHaveAttribute(
         'href',
@@ -47,14 +47,17 @@ describe('Contact', () => {
 
   it('jumps from station to station with the arrow keys', () => {
     render(<Contact />)
+    const [github, email, linkedin] = STATIONS
     fireEvent.keyDown(dial(), { key: 'ArrowRight' })
-    expect(
-      screen.getByText(new RegExp(`${formatFrequency(STATIONS[1].frequency)} FM`)),
-    ).toBeVisible()
+    expect(screen.getByText(new RegExp(`— ${linkedin.label}`))).toBeVisible()
     fireEvent.keyDown(dial(), { key: 'ArrowLeft' })
-    expect(
-      screen.getByText(new RegExp(`${formatFrequency(STATIONS[0].frequency)} FM`)),
-    ).toBeVisible()
+    expect(screen.getByText(new RegExp(`— ${email.label}`))).toBeVisible()
+    fireEvent.keyDown(dial(), { key: 'ArrowLeft' })
+    expect(screen.getByText(new RegExp(`— ${github.label}`))).toBeVisible()
+  })
+
+  it('keeps the stations in dial order on real São Paulo frequencies', () => {
+    expect(STATIONS.map((s) => s.frequency)).toEqual([89.1, 91.3, 106.3])
   })
 
   it('credits what is playing, or the last track heard', async () => {
