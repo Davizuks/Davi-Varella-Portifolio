@@ -13,7 +13,7 @@ export const EXPERIENCE: readonly ExperienceEntry[] = [
     place: 'Folks',
     role: 'AI Software Engineer',
     description:
-      'Construo de ponta a ponta, do microsserviço em Python e FastAPI no Google Cloud à tela em React, e ponho IA generativa para trabalhar de verdade em produtos para o setor de saúde. É o tipo de problema que me faz perder a hora.',
+      'Microsserviços em Python, FastAPI e Google Cloud, com interfaces em React. Desenvolvi produtos de gestão e governança com IA generativa para o setor de saúde.',
   },
   {
     id: 'qi-tech',
