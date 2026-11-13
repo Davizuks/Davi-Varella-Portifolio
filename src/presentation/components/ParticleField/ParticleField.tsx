@@ -55,6 +55,7 @@ import {
   type Bullet,
   type Impact,
   type Ship,
+  SHIP_KEYS,
   type ShipInput,
 } from './ship'
 
@@ -84,23 +85,6 @@ const NOTHING_PRESSED: ShipInput = {
   left: false,
   right: false,
   fire: false,
-}
-
-const KEYS: Record<string, keyof ShipInput> = {
-  ArrowUp: 'up',
-  w: 'up',
-  W: 'up',
-  ArrowDown: 'down',
-  s: 'down',
-  S: 'down',
-  ArrowLeft: 'left',
-  a: 'left',
-  A: 'left',
-  ArrowRight: 'right',
-  d: 'right',
-  D: 'right',
-  ' ': 'fire',
-  Enter: 'fire',
 }
 
 export function ParticleField({
@@ -386,7 +370,7 @@ export function ParticleField({
       if (down && (!playing || !visible || paused)) return
       const target = e.target as HTMLElement | null
       if (target?.closest('input, textarea, select, [contenteditable="true"]')) return
-      const key = KEYS[e.key]
+      const key = SHIP_KEYS[e.key]
       if (!key || (key === 'fire' && target?.closest('button, a'))) return
       controls.current[key] = down
       e.preventDefault()

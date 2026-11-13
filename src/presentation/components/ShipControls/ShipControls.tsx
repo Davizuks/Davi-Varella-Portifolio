@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import type { MouseEvent, PointerEvent } from 'react'
+import { SHIP_KEYS } from '@/presentation/components/ParticleField/ship'
 import styles from './ShipControls.module.css'
 
 export type HoldKey = 'up' | 'down' | 'left' | 'right' | 'fire'
@@ -10,7 +12,31 @@ type ShipControlsProps = {
 }
 
 export function ShipControls({ onInput, onRebuild, damage }: ShipControlsProps) {
+  const [held, setHeld] = useState<Partial<Record<HoldKey, boolean>>>({})
+
+  useEffect(() => {
+    const setKey = (e: KeyboardEvent, down: boolean) => {
+      const key = SHIP_KEYS[e.key]
+      if (!key) return
+      const target = e.target as HTMLElement | null
+      if (down && target?.closest('input, textarea, select, [contenteditable="true"]')) return
+      setHeld((prev) => (Boolean(prev[key]) === down ? prev : { ...prev, [key]: down }))
+    }
+    const onKeyDown = (e: KeyboardEvent) => setKey(e, true)
+    const onKeyUp = (e: KeyboardEvent) => setKey(e, false)
+    const release = () => setHeld({})
+    window.addEventListener('keydown', onKeyDown)
+    window.addEventListener('keyup', onKeyUp)
+    window.addEventListener('blur', release)
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+      window.removeEventListener('keyup', onKeyUp)
+      window.removeEventListener('blur', release)
+    }
+  }, [])
+
   const hold = (key: HoldKey) => ({
+    'data-pressed': Boolean(held[key]),
     onPointerDown: (e: PointerEvent<HTMLButtonElement>) => {
       e.currentTarget.setPointerCapture?.(e.pointerId)
       onInput(key, true)
