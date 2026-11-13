@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { About } from '@/presentation/components/About/About'
 import { Contact } from '@/presentation/components/Contact/Contact'
+import { Education } from '@/presentation/components/Education/Education'
 import { Experience } from '@/presentation/components/Experience/Experience'
 import { Footer } from '@/presentation/components/Footer/Footer'
 import { Header } from '@/presentation/components/Header/Header'
@@ -21,6 +22,7 @@ export function HomePage() {
         <About />
         <Works />
         <Experience />
+        <Education />
         <Contact />
       </main>
       <Footer />

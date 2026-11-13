@@ -21,7 +21,7 @@ export function Contact() {
     <section id="contato" className={styles.contact} aria-labelledby="contato-titulo">
       <div className={styles.top}>
         <div>
-          <span className={styles.label}>[04] Contato</span>
+          <span className={styles.label}>[05] Contato</span>
           <h2 id="contato-titulo" className={styles.title}>
             Fim.
           </h2>
