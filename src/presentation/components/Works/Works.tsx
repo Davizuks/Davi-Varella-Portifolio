@@ -111,8 +111,9 @@ export function Works() {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setFocus(null)
       const delta = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0
-      const target = e.target as HTMLElement | null
-      const elsewhere = target?.closest('input, textarea, select, [contenteditable="true"]')
+      const elsewhere =
+        e.target instanceof Element &&
+        e.target.closest('input, textarea, select, [contenteditable="true"]')
       if (!delta || e.altKey || e.ctrlKey || e.metaKey || elsewhere) return
       e.preventDefault()
       setFocus(
