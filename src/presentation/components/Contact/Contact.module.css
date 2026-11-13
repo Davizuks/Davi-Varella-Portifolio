@@ -1,7 +1,7 @@
 .contact {
   display: flex;
   flex-direction: column;
-  min-height: calc(100svh - var(--footer-height, 72px));
+  min-height: 100svh;
   padding-top: clamp(84px, 11.5svh, 120px);
   overflow: hidden;
   background: var(--ink);
@@ -81,8 +81,6 @@
 
 @media (max-width: 900px) {
   .contact {
-    --footer-height: 60px;
-
     padding-top: 84px;
   }
 
