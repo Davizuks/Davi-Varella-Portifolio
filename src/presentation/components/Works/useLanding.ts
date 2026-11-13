@@ -8,17 +8,15 @@ export const LANDING_STAGGER = 130
 const LANDING_TIME = 1700
 const LANDING_AT = 0.35
 
+const canAnimate = () => typeof IntersectionObserver !== 'undefined' && !prefersReducedMotion()
+
 export function useLanding(sectionRef: RefObject<HTMLElement | null>, onLeave: () => void): Phase {
-  const [phase, setPhase] = useState<Phase>('waiting')
+  const [phase, setPhase] = useState<Phase>(() => (canAnimate() ? 'waiting' : 'settled'))
 
   useEffect(() => {
     const section = sectionRef.current
-    if (!section || typeof IntersectionObserver === 'undefined') {
-      setPhase('settled')
-      return
-    }
-    const still = prefersReducedMotion()
-    if (still) setPhase('settled')
+    if (!section || typeof IntersectionObserver === 'undefined') return
+    const still = !canAnimate()
     let timer = 0
     let waiting = true
     const observer = new IntersectionObserver(
