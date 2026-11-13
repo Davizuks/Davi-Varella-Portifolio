@@ -65,7 +65,10 @@ export function Footer() {
       <div className={styles.bar}>
         <span>
           © {CURRENT_YEAR} Davi Varella
-          <span className={styles.craft}> — VarellaLabs®</span>
+          {' — '}
+          <span className={styles.mark} aria-label="VarellaLabs, marca registrada">
+            DV / <em>Labs</em>®
+          </span>
         </span>
         <a href="#topo">
           <span className={styles.craft}>Voltar ao </span>topo (↑)
