@@ -64,6 +64,7 @@ export function useDeskCanvas({ sectionRef, canvasRef, papers, live }: DeskCanva
       cloud: { x: 0, y: 0, w: 0, h: 0, rot: 0, form: 1 } as Cloud,
       placed: false,
       shown: '',
+      interactive: true,
     }))
     const noise = createParticles(NOISE_PARTICLES, 99)
 
@@ -154,10 +155,14 @@ export function useDeskCanvas({ sectionRef, canvasRef, papers, live }: DeskCanva
 
         const opacity = smoothstep(0.7, 1, c.form).toFixed(2)
         const el = papers.current.get(item.id)
+        const interactive = c.form > 0.6
         if (el && opacity !== item.shown) {
           item.shown = opacity
           el.style.opacity = opacity
-          el.style.pointerEvents = c.form > 0.6 ? '' : 'none'
+        }
+        if (el && interactive !== item.interactive) {
+          item.interactive = interactive
+          el.style.pointerEvents = interactive ? '' : 'none'
         }
       }
       ctx.globalAlpha = 1
