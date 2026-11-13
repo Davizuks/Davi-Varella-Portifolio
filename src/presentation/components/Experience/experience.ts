@@ -13,7 +13,7 @@ export const EXPERIENCE: readonly ExperienceEntry[] = [
     place: 'Folks',
     role: 'AI Software Engineer',
     description:
-      'Construo sistemas de IA para a área da saúde, do back-end em Python à infraestrutura que os mantém no ar.',
+      'Microsserviços em Python e FastAPI no Google Cloud, com Firestore, e interfaces em React e TypeScript. Levo IA generativa com Gemini a produtos de gestão e governança para o setor de saúde.',
   },
   {
     id: 'qi-tech',
