@@ -1,0 +1,115 @@
+.dial {
+  position: relative;
+  height: 132px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.station,
+.marks span {
+  position: absolute;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.station {
+  top: 16px;
+  padding-bottom: 12px;
+  opacity: 0.6;
+}
+
+.station::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 2px);
+  width: 5px;
+  height: 5px;
+  background: currentColor;
+}
+
+.station[data-tuned='true'] {
+  font-weight: 500;
+  opacity: 1;
+}
+
+.scale {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  width: 100%;
+  height: 26px;
+  overflow: visible;
+  border-bottom: 1px solid;
+}
+
+.scale path {
+  stroke: currentColor;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.marks span {
+  top: 84px;
+  opacity: 0.6;
+}
+
+.needle {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 118px;
+  margin-left: -1px;
+  background: currentColor;
+  transition: left 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.needle::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: -7px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.range {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+  touch-action: pan-y;
+}
+
+.dial:has(.range:focus-visible) {
+  outline: 2px solid currentColor;
+  outline-offset: 6px;
+}
+
+.dial:has(.range:active) .needle {
+  transition: none;
+}
+
+@media (max-width: 900px) {
+  .dial {
+    font-size: 10px;
+  }
+
+  .marks span:nth-child(even) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .needle {
+    transition: none;
+  }
+}
