@@ -2,13 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { WaveLines } from '@/presentation/components/WaveLines/WaveLines'
 import { useLocalTime } from '@/presentation/hooks/useLocalTime'
 import styles from './Header.module.css'
-
-const NAV_ITEMS = [
-  { id: 'sobre', label: 'Sobre' },
-  { id: 'trabalhos', label: 'Trabalhos' },
-  { id: 'experiencia', label: 'Experiência' },
-  { id: 'contato', label: 'Contato' },
-]
+import { NAV_ITEMS } from './navigation'
 
 function Logo() {
   return (

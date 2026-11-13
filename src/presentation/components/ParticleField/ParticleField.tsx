@@ -70,6 +70,7 @@ type ParticleFieldProps = {
   onDamage?: (value: number) => void
   onRestart?: () => void
   onPause?: (paused: boolean) => void
+  onKey?: (key: keyof ShipInput, down: boolean) => void
 }
 
 const CRASH_SHAKE = 0.8
@@ -96,6 +97,7 @@ export function ParticleField({
   onDamage,
   onRestart,
   onPause,
+  onKey,
 }: ParticleFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const loaderRef = useRef<HTMLSpanElement>(null)
@@ -373,6 +375,7 @@ export function ParticleField({
       const key = SHIP_KEYS[e.key]
       if (!key || (key === 'fire' && target?.closest('button, a'))) return
       controls.current[key] = down
+      onKey?.(key, down)
       e.preventDefault()
     }
     const onKeyDown = (e: KeyboardEvent) => setKey(e, true)
@@ -407,6 +410,7 @@ export function ParticleField({
       if (paused) {
         pausedAt = performance.now()
         Object.assign(controls.current, NOTHING_PRESSED)
+        for (const key of Object.keys(NOTHING_PRESSED) as (keyof ShipInput)[]) onKey?.(key, false)
       } else {
         startedAt += performance.now() - pausedAt
       }
@@ -451,7 +455,7 @@ export function ParticleField({
       host.removeEventListener('pointermove', onPointerMove)
       host.removeEventListener('pointerleave', onPointerLeave)
     }
-  }, [mapSrc, meteorSrc, controls, onReady, onPlayable, onDamage, onRestart, onPause])
+  }, [mapSrc, meteorSrc, controls, onReady, onPlayable, onDamage, onRestart, onPause, onKey])
 
   return (
     <>

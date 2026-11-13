@@ -118,6 +118,20 @@ describe('desk', () => {
     }
   })
 
+  it('can pose every paper in every state of both layouts', () => {
+    for (const layout of ['desktop', 'mobile'] as const) {
+      for (const arrived of [false, true]) {
+        for (const focus of [null, PROJECTS[0].id]) {
+          const current = { ...view(focus), layout, arrived, positions: LAYOUTS[layout].slots }
+          for (const id of PAPER_IDS) {
+            const pose = poseOf(id, current)
+            expect(Object.values(pose).every(Number.isFinite), `${layout} ${id}`).toBe(true)
+          }
+        }
+      }
+    }
+  })
+
   it('straightens the focused paper and pushes the others away', () => {
     const [first, second] = PROJECTS
     expect(poseOf(first.id, view(first.id))).toMatchObject({ x: 360, y: 560, rot: 0 })

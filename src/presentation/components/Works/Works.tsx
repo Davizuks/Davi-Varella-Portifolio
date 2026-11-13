@@ -24,7 +24,14 @@ import styles from './Works.module.css'
 const DRAG_THRESHOLD = 5
 const SWIPE_STEP = 48
 
-type Drag = { id: string; startX: number; startY: number; origin: Slot; moved: boolean }
+type Drag = {
+  id: string
+  pointer: number
+  startX: number
+  startY: number
+  origin: Slot
+  moved: boolean
+}
 type Desk = { positions: Record<string, Slot>; order: readonly string[] }
 
 const INITIAL_DESKS: Record<LayoutName, Desk> = {
@@ -91,13 +98,23 @@ export function Works() {
     document.fonts?.ready.then(measure).catch(() => {})
   }, [stage.layout])
 
+  const opened = useRef<string | null>(null)
+  useEffect(() => {
+    const previous = opened.current
+    opened.current = focus
+    if (focus && !previous) closeRef.current?.focus({ preventScroll: true })
+    if (!focus && previous) papers.current.get(previous)?.focus({ preventScroll: true })
+  }, [focus])
+
   useEffect(() => {
     if (!focus) return
-    closeRef.current?.focus({ preventScroll: true })
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setFocus(null)
       const delta = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0
-      if (!delta) return
+      const elsewhere =
+        e.target instanceof Element &&
+        e.target.closest('input, textarea, select, [contenteditable="true"]')
+      if (!delta || e.altKey || e.ctrlKey || e.metaKey || elsewhere) return
       e.preventDefault()
       setFocus(
         neighbour(
@@ -111,10 +128,12 @@ export function Works() {
   }, [focus])
 
   const onPointerDown = (e: PointerEvent<HTMLElement>, id: string) => {
-    if (focus || phase !== 'settled' || e.button !== 0) return
+    if (focus || phase !== 'settled' || e.button !== 0 || drag.current) return
+    suppressClick.current = false
     e.currentTarget.setPointerCapture?.(e.pointerId)
     drag.current = {
       id,
+      pointer: e.pointerId,
       startX: e.clientX,
       startY: e.clientY,
       origin: positions[id] ?? layout.slots[id],
@@ -126,7 +145,7 @@ export function Works() {
 
   const onPointerMove = (e: PointerEvent<HTMLElement>) => {
     const d = drag.current
-    if (!d) return
+    if (!d || d.pointer !== e.pointerId) return
     const dx = (e.clientX - d.startX) / stage.scale
     const dy = (e.clientY - d.startY) / stage.scale
     if (!d.moved && Math.hypot(dx, dy) < DRAG_THRESHOLD) return
@@ -143,7 +162,7 @@ export function Works() {
 
   const endDrag = (e: PointerEvent<HTMLElement>, cancelled: boolean) => {
     const d = drag.current
-    if (!d) return
+    if (!d || d.pointer !== e.pointerId) return
     drag.current = null
     setDragging(null)
     if (!d.moved) return

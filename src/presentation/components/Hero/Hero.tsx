@@ -15,6 +15,7 @@ export function Hero() {
   const [playable, setPlayable] = useState(false)
   const [damage, setDamage] = useState(0)
   const [paused, setPaused] = useState(false)
+  const [held, setHeld] = useState<Partial<Record<HoldKey, boolean>>>({})
   const controls = useRef<GameControls>({
     up: false,
     down: false,
@@ -31,6 +32,9 @@ export function Hero() {
   const onInput = useCallback((key: HoldKey, pressed: boolean) => {
     controls.current[key] = pressed
   }, [])
+  const onKey = useCallback((key: HoldKey, down: boolean) => {
+    setHeld((prev) => (Boolean(prev[key]) === down ? prev : { ...prev, [key]: down }))
+  }, [])
   const onRebuild = useCallback(() => {
     controls.current.rebuild = true
   }, [])
@@ -46,6 +50,7 @@ export function Hero() {
         onDamage={setDamage}
         onRestart={onRestart}
         onPause={setPaused}
+        onKey={onKey}
       />
 
       <span className={styles.caption}>
@@ -73,7 +78,9 @@ export function Hero() {
       </span>
       <span className={styles.edition}>Portfólio {CURRENT_YEAR}</span>
 
-      {playable && <ShipControls onInput={onInput} onRebuild={onRebuild} damage={damage} />}
+      {playable && (
+        <ShipControls onInput={onInput} onRebuild={onRebuild} damage={damage} held={held} />
+      )}
     </section>
   )
 }
