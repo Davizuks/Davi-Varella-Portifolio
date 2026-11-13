@@ -98,13 +98,22 @@ export function Works() {
     document.fonts?.ready.then(measure).catch(() => {})
   }, [stage.layout])
 
+  const opened = useRef<string | null>(null)
+  useEffect(() => {
+    const previous = opened.current
+    opened.current = focus
+    if (focus && !previous) closeRef.current?.focus({ preventScroll: true })
+    if (!focus && previous) papers.current.get(previous)?.focus({ preventScroll: true })
+  }, [focus])
+
   useEffect(() => {
     if (!focus) return
-    closeRef.current?.focus({ preventScroll: true })
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setFocus(null)
       const delta = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0
-      if (!delta) return
+      const target = e.target as HTMLElement | null
+      const elsewhere = target?.closest('input, textarea, select, [contenteditable="true"]')
+      if (!delta || e.altKey || e.ctrlKey || e.metaKey || elsewhere) return
       e.preventDefault()
       setFocus(
         neighbour(
