@@ -7,10 +7,12 @@ type ShipControlsProps = {
   onInput: (key: HoldKey, pressed: boolean) => void
   onRebuild: () => void
   damage: number
+  held: Partial<Record<HoldKey, boolean>>
 }
 
-export function ShipControls({ onInput, onRebuild, damage }: ShipControlsProps) {
+export function ShipControls({ onInput, onRebuild, damage, held }: ShipControlsProps) {
   const hold = (key: HoldKey) => ({
+    'data-pressed': Boolean(held[key]),
     onPointerDown: (e: PointerEvent<HTMLButtonElement>) => {
       e.currentTarget.setPointerCapture?.(e.pointerId)
       onInput(key, true)

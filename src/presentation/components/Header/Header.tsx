@@ -2,13 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { WaveLines } from '@/presentation/components/WaveLines/WaveLines'
 import { useLocalTime } from '@/presentation/hooks/useLocalTime'
 import styles from './Header.module.css'
-
-const NAV_ITEMS = [
-  { id: 'sobre', label: 'Sobre' },
-  { id: 'trabalhos', label: 'Trabalhos' },
-  { id: 'experiencia', label: 'Experiência' },
-  { id: 'contato', label: 'Contato' },
-]
+import { NAV_ITEMS } from './navigation'
 
 function Logo() {
   return (
@@ -94,7 +88,7 @@ export function Header() {
               key={item.id}
               href={`#${item.id}`}
               onClick={closeMenu}
-              style={{ animationDelay: `${120 + i * 60}ms` }}
+              style={{ animationDelay: `${260 + i * 70}ms` }}
             >
               <span>{String(i + 1).padStart(2, '0')}</span>
               {item.label}

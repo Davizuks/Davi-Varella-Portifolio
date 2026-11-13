@@ -55,6 +55,7 @@ import {
   type Bullet,
   type Impact,
   type Ship,
+  SHIP_KEYS,
   type ShipInput,
 } from './ship'
 
@@ -69,6 +70,7 @@ type ParticleFieldProps = {
   onDamage?: (value: number) => void
   onRestart?: () => void
   onPause?: (paused: boolean) => void
+  onKey?: (key: keyof ShipInput, down: boolean) => void
 }
 
 const CRASH_SHAKE = 0.8
@@ -86,23 +88,6 @@ const NOTHING_PRESSED: ShipInput = {
   fire: false,
 }
 
-const KEYS: Record<string, keyof ShipInput> = {
-  ArrowUp: 'up',
-  w: 'up',
-  W: 'up',
-  ArrowDown: 'down',
-  s: 'down',
-  S: 'down',
-  ArrowLeft: 'left',
-  a: 'left',
-  A: 'left',
-  ArrowRight: 'right',
-  d: 'right',
-  D: 'right',
-  ' ': 'fire',
-  Enter: 'fire',
-}
-
 export function ParticleField({
   mapSrc,
   meteorSrc,
@@ -112,6 +97,7 @@ export function ParticleField({
   onDamage,
   onRestart,
   onPause,
+  onKey,
 }: ParticleFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const loaderRef = useRef<HTMLSpanElement>(null)
@@ -386,9 +372,10 @@ export function ParticleField({
       if (down && (!playing || !visible || paused)) return
       const target = e.target as HTMLElement | null
       if (target?.closest('input, textarea, select, [contenteditable="true"]')) return
-      const key = KEYS[e.key]
+      const key = SHIP_KEYS[e.key]
       if (!key || (key === 'fire' && target?.closest('button, a'))) return
       controls.current[key] = down
+      onKey?.(key, down)
       e.preventDefault()
     }
     const onKeyDown = (e: KeyboardEvent) => setKey(e, true)
@@ -423,6 +410,7 @@ export function ParticleField({
       if (paused) {
         pausedAt = performance.now()
         Object.assign(controls.current, NOTHING_PRESSED)
+        for (const key of Object.keys(NOTHING_PRESSED) as (keyof ShipInput)[]) onKey?.(key, false)
       } else {
         startedAt += performance.now() - pausedAt
       }
@@ -467,7 +455,7 @@ export function ParticleField({
       host.removeEventListener('pointermove', onPointerMove)
       host.removeEventListener('pointerleave', onPointerLeave)
     }
-  }, [mapSrc, meteorSrc, controls, onReady, onPlayable, onDamage, onRestart, onPause])
+  }, [mapSrc, meteorSrc, controls, onReady, onPlayable, onDamage, onRestart, onPause, onKey])
 
   return (
     <>

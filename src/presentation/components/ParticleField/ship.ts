@@ -131,3 +131,20 @@ export function stepImpacts(impacts: Impact[]): void {
 }
 
 export const impactProgress = (impact: Impact) => impact.age / IMPACT_FRAMES
+
+export const SHIP_KEYS: Record<string, keyof ShipInput> = {
+  ArrowUp: 'up',
+  w: 'up',
+  W: 'up',
+  ArrowDown: 'down',
+  s: 'down',
+  S: 'down',
+  ArrowLeft: 'left',
+  a: 'left',
+  A: 'left',
+  ArrowRight: 'right',
+  d: 'right',
+  D: 'right',
+  ' ': 'fire',
+  Enter: 'fire',
+}
