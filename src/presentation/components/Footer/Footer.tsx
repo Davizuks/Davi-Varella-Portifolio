@@ -70,6 +70,7 @@ export function Footer() {
             DV / <em>Labs</em>®
           </span>
         </span>
+        <span className={styles.kind}>Be kind.</span>
         <a href="#topo">
           <span className={styles.craft}>Voltar ao </span>topo (↑)
         </a>

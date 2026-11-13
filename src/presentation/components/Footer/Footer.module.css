@@ -90,12 +90,24 @@
 }
 
 .bar {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
   height: 72px;
   border-top: 1px solid var(--paper);
+}
+
+.bar > :last-child {
+  justify-self: end;
+}
+
+.kind {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 @media (max-width: 900px) {
@@ -113,8 +125,15 @@
   }
 
   .bar {
+    grid-template-columns: auto 1fr auto;
+    gap: 8px;
     height: 60px;
     font-size: 10px;
+  }
+
+  .kind {
+    justify-self: center;
+    font-size: 16px;
   }
 
   .craft {

@@ -31,4 +31,9 @@ describe('Footer', () => {
     expect(screen.getByText(new RegExp(`© ${new Date().getFullYear()} Davi Varella`))).toBeVisible()
     expect(screen.getByRole('link', { name: /topo \(↑\)/i })).toHaveAttribute('href', '#topo')
   })
+
+  it('signs off asking for kindness', () => {
+    render(<Footer />)
+    expect(screen.getByText('Be kind.')).toBeInTheDocument()
+  })
 })
