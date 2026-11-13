@@ -13,7 +13,7 @@ export const EXPERIENCE: readonly ExperienceEntry[] = [
     place: 'Folks',
     role: 'AI Software Engineer',
     description:
-      'Microsserviços em Python, FastAPI e Google Cloud, com interfaces em React. Desenvolvo produtos com IA generativa que apoiam implantações em grandes instituições de saúde, com impacto em milhares de pacientes. Também toco a área tech interna: aplicações estruturadas para escalar, automações e design system.',
+      'Python, FastAPI e Google Cloud no back-end, React no front-end. Desenvolvo produtos com IA generativa para implantações em grandes instituições de saúde, alcançando milhares de pacientes, e conduzo a engenharia interna: arquitetura escalável, automações e design system.',
   },
   {
     id: 'qi-tech',
