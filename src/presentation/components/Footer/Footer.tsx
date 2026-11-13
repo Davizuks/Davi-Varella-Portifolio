@@ -2,15 +2,11 @@ import { SOCIALS } from '@/presentation/components/Contact/contact'
 import { EmailLink } from '@/presentation/components/Contact/EmailLink'
 import { NAV_ITEMS } from '@/presentation/components/Header/navigation'
 import { PROJECTS } from '@/presentation/components/Works/projects'
-import { useNowPlaying } from '@/presentation/hooks/useNowPlaying'
 import styles from './Footer.module.css'
 
 const CURRENT_YEAR = new Date().getFullYear()
 
 export function Footer() {
-  const listening = useNowPlaying()
-  const listeningLabel = listening?.live ? 'Tocando agora' : 'Última que ouvi'
-
   return (
     <footer className={styles.footer}>
       <div className={styles.columns}>
@@ -22,12 +18,6 @@ export function Footer() {
             Full Stack Software Engineer.
             <br />
             São Paulo, Brasil.
-          </p>
-          <p className={styles.playing} aria-live="polite">
-            <span>{listening ? listeningLabel : 'Trilha'}</span>
-            {listening
-              ? `${listening.track.title} — ${listening.track.artist}`
-              : 'Silêncio no momento.'}
           </p>
         </div>
 
