@@ -19,6 +19,7 @@ export type Particle = {
   dy: number
   dvx: number
   dvy: number
+  spin: number
 }
 
 export type Box = { ox: number; oy: number; width: number; height: number; cell: number }
@@ -32,10 +33,16 @@ export const TIMELINE = {
 } as const
 
 export const IMPACT_X = 0.56
-const BUILD_UP = 1.6
+const BUILD_UP = 1.1
+const BUILD_SCATTER = 0.4
+const SWIRL = 0.45
+const SWIRL_REACH = 240
+const DRIFT = 0.55
+const DRIFT_REACH = 140
+const AT_HOME = 0.5
 const LAST_PIECE = 1
-const PLACE_SPRING = 0.05
-const PLACE_DAMPING = 0.86
+const PLACE_SPRING = 0.035
+const PLACE_DAMPING = 0.88
 
 const GRAVITY = 0.45
 const AIR_DRAG = 0.992
@@ -169,12 +176,17 @@ export function createParticles(
       free: old ? old.free : false,
       mx: m.x,
       my: m.y,
-      delay: ((bottom - target.y) / tall) * BUILD_UP + random() * 0.15,
+      delay:
+        ((bottom - target.y) / tall) * BUILD_UP +
+        random() ** 2 * BUILD_SCATTER +
+        Math.sin(target.x * 0.021) * 0.12 +
+        0.12,
       hit: old ? old.hit : false,
       dx: 0,
       dy: 0,
       dvx: 0,
       dvy: 0,
+      spin: (random() < 0.85 ? 1 : -1) * (0.3 + random() * 0.6),
     })
   }
   return particles
@@ -252,8 +264,20 @@ export function stepParticle(p: Particle, ctx: StepContext): void {
     p.free = false
   }
 
-  p.vx = (p.vx + (p.tx - p.x) * PLACE_SPRING) * PLACE_DAMPING
-  p.vy = (p.vy + (p.ty - p.y) * PLACE_SPRING) * PLACE_DAMPING
+  const toX = p.tx - p.x
+  const toY = p.ty - p.y
+  let pullX = toX * PLACE_SPRING
+  let pullY = toY * PLACE_SPRING
+  if (Math.abs(toX) > AT_HOME || Math.abs(toY) > AT_HOME) {
+    const far = Math.hypot(toX, toY)
+    const swirl = SWIRL * p.spin * Math.min(1, far / SWIRL_REACH)
+    const drift = DRIFT * Math.min(1, far / DRIFT_REACH)
+    const flow = Math.sin(p.x * 0.009 + ctx.t * 1.3) + Math.cos(p.y * 0.011 - ctx.t * 1.1)
+    pullX += -toY * swirl * PLACE_SPRING + Math.cos(flow * 2.4) * drift
+    pullY += toX * swirl * PLACE_SPRING + Math.sin(flow * 2.4) * drift
+  }
+  p.vx = (p.vx + pullX) * PLACE_DAMPING
+  p.vy = (p.vy + pullY) * PLACE_DAMPING
   p.x += p.vx
   p.y += p.vy
   p.size += (p.ts - p.size) * 0.08

@@ -94,7 +94,7 @@ export function Header() {
               key={item.id}
               href={`#${item.id}`}
               onClick={closeMenu}
-              style={{ animationDelay: `${120 + i * 60}ms` }}
+              style={{ animationDelay: `${260 + i * 70}ms` }}
             >
               <span>{String(i + 1).padStart(2, '0')}</span>
               {item.label}

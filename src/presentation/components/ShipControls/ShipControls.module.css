@@ -96,7 +96,9 @@
 }
 
 .pad button:active,
+.pad button[data-pressed='true'],
 .fire:active,
+.fire[data-pressed='true'],
 .rebuild:active {
   background: var(--paper);
   color: var(--ink);
