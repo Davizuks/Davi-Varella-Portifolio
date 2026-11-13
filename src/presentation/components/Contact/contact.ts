@@ -32,7 +32,7 @@ export const DEFAULT_FREQUENCY = 91.3
 
 export const CREDITS: readonly { role: string; name: string }[] = [
   { role: 'Escrito e programado por', name: 'Davi Varella' },
-  { role: 'Elenco de apoio', name: 'Python · React · PostgreSQL · Docker · AWS' },
+  { role: 'Elenco de apoio', name: 'React · TypeScript · Vite · Canvas · Cloud Run' },
   { role: 'Locação', name: 'São Paulo, Brasil' },
 ]
 
