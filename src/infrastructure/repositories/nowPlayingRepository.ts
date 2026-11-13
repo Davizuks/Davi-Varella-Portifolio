@@ -1,6 +1,7 @@
-import type { Track } from '@/domain/entities/Track'
+import type { Listening, Track } from '@/domain/entities/Track'
 
 export const NOW_PLAYING_URL = '/api/now-playing'
+export const LAST_PLAYED_URL = '/api/last-played'
 
 const OFFLINE_ARTIST = 'Offline'
 
@@ -12,8 +13,15 @@ export function parseProfileCard(svg: string): Track | null {
   return { title, artist }
 }
 
-export async function fetchNowPlaying(signal?: AbortSignal): Promise<Track | null> {
-  const response = await fetch(NOW_PLAYING_URL, { signal })
+async function fetchCard(url: string, signal?: AbortSignal): Promise<Track | null> {
+  const response = await fetch(url, { signal })
   if (!response.ok) return null
   return parseProfileCard(await response.text())
+}
+
+export async function fetchListening(signal?: AbortSignal): Promise<Listening | null> {
+  const playing = await fetchCard(NOW_PLAYING_URL, signal)
+  if (playing) return { track: playing, live: true }
+  const last = await fetchCard(LAST_PLAYED_URL, signal)
+  return last && { track: last, live: false }
 }

@@ -8,7 +8,8 @@ import styles from './Footer.module.css'
 const CURRENT_YEAR = new Date().getFullYear()
 
 export function Footer() {
-  const track = useNowPlaying()
+  const listening = useNowPlaying()
+  const listeningLabel = listening?.live ? 'Tocando agora' : 'Última que ouvi'
 
   return (
     <footer className={styles.footer}>
@@ -23,8 +24,10 @@ export function Footer() {
             São Paulo, Brasil.
           </p>
           <p className={styles.playing} aria-live="polite">
-            <span>{track ? 'Tocando agora' : 'Trilha'}</span>
-            {track ? `${track.title} — ${track.artist}` : 'Silêncio no momento.'}
+            <span>{listening ? listeningLabel : 'Trilha'}</span>
+            {listening
+              ? `${listening.track.title} — ${listening.track.artist}`
+              : 'Silêncio no momento.'}
           </p>
         </div>
 

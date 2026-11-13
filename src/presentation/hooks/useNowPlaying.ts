@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react'
-import type { Track } from '@/domain/entities/Track'
-import { fetchNowPlaying } from '@/infrastructure/repositories/nowPlayingRepository'
+import type { Listening } from '@/domain/entities/Track'
+import { fetchListening } from '@/infrastructure/repositories/nowPlayingRepository'
 
 const REFRESH_MS = 30_000
 
-export function useNowPlaying(): Track | null {
-  const [track, setTrack] = useState<Track | null>(null)
+export function useNowPlaying(): Listening | null {
+  const [listening, setListening] = useState<Listening | null>(null)
 
   useEffect(() => {
     const controller = new AbortController()
     const refresh = () => {
       if (document.hidden) return
-      fetchNowPlaying(controller.signal)
-        .then(setTrack)
+      fetchListening(controller.signal)
+        .then(setListening)
         .catch(() => {})
     }
     refresh()
@@ -25,5 +25,5 @@ export function useNowPlaying(): Track | null {
     }
   }, [])
 
-  return track
+  return listening
 }
