@@ -110,6 +110,22 @@
   .marks span:nth-child(even) {
     display: none;
   }
+
+  .station:nth-child(odd) {
+    top: 0;
+    padding-bottom: 28px;
+  }
+
+  .station:nth-child(odd)::before {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    width: 1px;
+    height: 18px;
+    background: currentColor;
+    opacity: 0.6;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
