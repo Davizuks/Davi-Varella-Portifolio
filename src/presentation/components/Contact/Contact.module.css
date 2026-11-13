@@ -96,6 +96,8 @@
 }
 
 .hints {
+  user-select: none;
+  -webkit-user-select: none;
   display: flex;
   justify-content: space-between;
   gap: 16px;

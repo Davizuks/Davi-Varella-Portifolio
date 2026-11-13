@@ -5,6 +5,10 @@
   font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .station,
