@@ -1,0 +1,217 @@
+.education {
+  --aside: 26.47%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100svh;
+  min-height: 100lvh;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 100lvh;
+  padding: clamp(84px, 11.5svh, 104px) var(--gutter) clamp(24px, 5svh, 120px);
+  border-top: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.head,
+.extra {
+  display: grid;
+  grid-template-columns: var(--aside) minmax(0, 1fr);
+}
+
+.label,
+.period,
+.issuer {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.label {
+  margin: 0;
+  padding-top: 16px;
+  font-weight: 500;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(52px, min(6.67vw, 11svh), 96px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+.courses {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: clamp(24px, 6svh, 96px) 0 0;
+  padding: 0;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  list-style: none;
+}
+
+.course {
+  padding: clamp(16px, 2.9svh, 26px) 28px clamp(18px, 3.3svh, 30px);
+  border-left: 1px solid;
+}
+
+.course:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.place {
+  margin: clamp(10px, 2svh, 22px) 0 0;
+  font-size: clamp(26px, 2.5vw, 36px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.degree {
+  margin: 2px 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 1.6vw, 24px);
+  font-style: italic;
+  line-height: 1.15;
+}
+
+.description {
+  margin: 10px 0 0;
+  font-size: clamp(14px, 1.05vw, 16px);
+  line-height: 1.4;
+}
+
+.extra {
+  border-bottom: 1px solid;
+}
+
+.extra .label {
+  padding-top: clamp(12px, 2svh, 18px);
+}
+
+.certificates,
+.languages {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.certificates {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  padding: clamp(4px, 0.8svh, 8px) 0;
+}
+
+.certificate {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: clamp(6px, 1.1svh, 10px) 0;
+}
+
+.name {
+  font-size: clamp(14px, 1.1vw, 17px);
+  font-weight: 500;
+}
+
+.issuer {
+  flex-shrink: 0;
+  font-size: 11px;
+}
+
+.languages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 36px;
+  padding: clamp(10px, 1.9svh, 16px) 0;
+  font-size: clamp(14px, 1.1vw, 17px);
+  font-weight: 500;
+}
+
+.languages em {
+  font-family: var(--font-serif);
+  font-size: 1.15em;
+  font-weight: 400;
+}
+
+@media (max-width: 1100px) {
+  .certificates {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .education {
+    justify-content: flex-start;
+    padding: 84px var(--gutter) 72px;
+  }
+
+  .head,
+  .extra {
+    display: block;
+  }
+
+  .label {
+    display: block;
+    padding-top: 0;
+    font-size: 11px;
+  }
+
+  .title {
+    margin-top: 10px;
+  }
+
+  .courses {
+    display: block;
+    margin-top: 54px;
+    border-bottom: 0;
+  }
+
+  .course,
+  .course:first-child {
+    padding: 23px 0 24px;
+    border-left: 0;
+    border-bottom: 1px solid;
+  }
+
+  .period {
+    font-size: 10px;
+  }
+
+  .place {
+    margin-top: 7px;
+  }
+
+  .extra {
+    padding: 23px 0 20px;
+  }
+
+  .extra .label {
+    padding-top: 0;
+  }
+
+  .certificates {
+    padding: 8px 0 0;
+  }
+
+  .certificate {
+    display: block;
+    padding: 7px 0;
+  }
+
+  .issuer {
+    display: block;
+    margin-top: 2px;
+    font-size: 10px;
+  }
+
+  .languages {
+    padding: 12px 0 0;
+  }
+}
