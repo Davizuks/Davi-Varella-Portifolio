@@ -11,7 +11,7 @@ export const EXPERIENCE: readonly ExperienceEntry[] = [
     id: 'folks',
     period: 'Jul 2026 — Hoje',
     place: 'Folks',
-    role: 'AI Software Engineer · Estágio',
+    role: 'AI Software Engineer',
     description: 'Infraestrutura de software e inteligência artificial.',
   },
   {
