@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { About } from '@/presentation/components/About/About'
 import { Header } from '@/presentation/components/Header/Header'
 import { Hero } from '@/presentation/components/Hero/Hero'
+import { Works } from '@/presentation/components/Works/Works'
 
 export function HomePage() {
   useEffect(() => {
@@ -15,6 +16,7 @@ export function HomePage() {
       <main id="topo">
         <Hero />
         <About />
+        <Works />
       </main>
     </>
   )
