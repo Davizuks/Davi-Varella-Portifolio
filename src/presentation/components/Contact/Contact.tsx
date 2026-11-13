@@ -1,5 +1,6 @@
 import { ParticleWave } from '@/presentation/components/ParticleWave/ParticleWave'
 import { EMAIL, SOCIALS } from './contact'
+import { EmailLink } from './EmailLink'
 import styles from './Contact.module.css'
 
 export function Contact() {
@@ -11,9 +12,9 @@ export function Contact() {
       </h2>
 
       <div className={styles.reach}>
-        <a className={styles.email} href={`mailto:${EMAIL}`}>
+        <EmailLink className={styles.email}>
           {EMAIL} <span aria-hidden="true">↗</span>
-        </a>
+        </EmailLink>
         <ul className={styles.socials}>
           {SOCIALS.map((social) => (
             <li key={social.label}>

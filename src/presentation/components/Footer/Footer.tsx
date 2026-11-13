@@ -1,4 +1,5 @@
-import { EMAIL, SOCIALS } from '@/presentation/components/Contact/contact'
+import { SOCIALS } from '@/presentation/components/Contact/contact'
+import { EmailLink } from '@/presentation/components/Contact/EmailLink'
 import { NAV_ITEMS } from '@/presentation/components/Header/navigation'
 import { PROJECTS } from '@/presentation/components/Works/projects'
 import styles from './Footer.module.css'
@@ -55,7 +56,7 @@ export function Footer() {
               </li>
             ))}
             <li>
-              <a href={`mailto:${EMAIL}`}>E-mail</a>
+              <EmailLink>E-mail</EmailLink>
             </li>
           </ul>
         </nav>

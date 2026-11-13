@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { Contact } from './Contact'
 import { EMAIL, SOCIALS } from './contact'
 
@@ -24,5 +24,14 @@ describe('Contact', () => {
         social.url,
       )
     }
+  })
+
+  it('copies the address when the e-mail is clicked', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined)
+    Object.assign(navigator, { clipboard: { writeText } })
+    render(<Contact />)
+    fireEvent.click(screen.getByRole('link', { name: new RegExp(EMAIL) }))
+    expect(writeText).toHaveBeenCalledWith(EMAIL)
+    expect(await screen.findByText('Copiado ✓')).toBeInTheDocument()
   })
 })
