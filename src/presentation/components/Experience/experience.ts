@@ -13,7 +13,7 @@ export const EXPERIENCE: readonly ExperienceEntry[] = [
     place: 'Folks',
     role: 'AI Software Engineer',
     description:
-      'Microsserviços em Python e FastAPI no Google Cloud, com Firestore, e interfaces em React e TypeScript. Levo IA generativa com Gemini a produtos de gestão e governança para o setor de saúde.',
+      'Construo de ponta a ponta, do microsserviço em Python e FastAPI no Google Cloud à tela em React, e ponho IA generativa para trabalhar de verdade em produtos para o setor de saúde. É o tipo de problema que me faz perder a hora.',
   },
   {
     id: 'qi-tech',
