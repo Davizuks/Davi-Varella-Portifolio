@@ -1,0 +1,35 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 72px;
+  margin: 0 var(--gutter);
+  border-top: 1px solid var(--paper);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.footer a {
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+@media (max-width: 900px) {
+  .footer {
+    height: 60px;
+    font-size: 10px;
+  }
+
+  .craft {
+    display: none;
+  }
+}
