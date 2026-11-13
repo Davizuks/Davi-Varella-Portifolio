@@ -26,7 +26,7 @@ export const EXPERIENCE: readonly ExperienceEntry[] = [
   {
     id: 'adl',
     period: 'Out 2023 — Set 2024',
-    place: 'ADL Mineração',
+    place: 'ADL',
     role: 'Support Analyst',
     description:
       'Primeira linha de TI de uma empresa pequena: suporte aos usuários, redes, acessos e manutenção de computadores e servidores.',
