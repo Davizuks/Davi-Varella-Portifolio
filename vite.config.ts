@@ -5,6 +5,16 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api/now-playing': {
+        target: 'https://spotify-github-profile.kittinanx.com',
+        changeOrigin: true,
+        rewrite: () =>
+          '/api/view?uid=31xpxag2vrv2jhiufbogqwf56b6a&cover_image=false&theme=novatorem&show_offline=true',
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
