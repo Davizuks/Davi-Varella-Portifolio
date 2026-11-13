@@ -1,6 +1,8 @@
 export type Course = {
   id: string
-  period: string
+  start: string
+  end: string
+  ongoing?: boolean
   place: string
   degree: string
   description: string
@@ -11,7 +13,9 @@ export type Certificate = { id: string; name: string; issuer: string; issued: st
 export const COURSES: readonly Course[] = [
   {
     id: 'fecap',
-    period: 'Jan 2026 — Dez 2029',
+    start: 'Jan 2026',
+    end: 'Dez 2029',
+    ongoing: true,
     place: 'FECAP',
     degree: 'Bacharelado em Ciência da Computação',
     description:
@@ -19,14 +23,16 @@ export const COURSES: readonly Course[] = [
   },
   {
     id: 'ilac',
-    period: 'Jan 2025 — Mar 2025',
+    start: 'Jan 2025',
+    end: 'Mar 2025',
     place: 'ILAC',
     degree: 'Intercâmbio de inglês',
     description: 'Imersão em inglês geral e de negócios, fora do país.',
   },
   {
     id: 'etec',
-    period: 'Jan 2022 — Dez 2024',
+    start: 'Jan 2022',
+    end: 'Dez 2024',
     place: 'Etec',
     degree: 'Técnico em Desenvolvimento de Sistemas',
     description:
@@ -45,3 +51,6 @@ export const LANGUAGES: readonly { name: string; level: string }[] = [
   { name: 'Português', level: 'nativo' },
   { name: 'Inglês', level: 'intermediário' },
 ]
+
+export const CARD_NUMBER = '0004'
+export const BLANK_ROWS = 2
