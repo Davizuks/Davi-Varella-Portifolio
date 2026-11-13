@@ -1,0 +1,354 @@
+.education {
+  --rule: color-mix(in srgb, var(--ink) 22%, transparent);
+
+  display: grid;
+  grid-template-columns: 30% minmax(0, 1fr);
+  align-items: center;
+  gap: 0 clamp(24px, 4vw, 72px);
+  min-height: 100svh;
+  min-height: 100lvh;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 100lvh;
+  padding: clamp(84px, 11.5svh, 104px) var(--gutter) clamp(28px, 5svh, 80px);
+  border-top: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: clamp(14px, 3svh, 28px) 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(44px, min(5.2vw, 10svh), 84px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+.languages {
+  margin: auto 0 0;
+  padding-top: 32px;
+}
+
+.languages dd {
+  margin: 6px 0 0;
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 500;
+}
+
+.languages em {
+  font-family: var(--font-serif);
+  font-size: 1.15em;
+  font-weight: 400;
+}
+
+.desk {
+  justify-self: center;
+  width: min(100%, 820px);
+}
+
+.card {
+  padding: clamp(16px, 2.6svh, 26px) clamp(18px, 2vw, 30px) clamp(10px, 1.6svh, 18px);
+  border: 1px solid;
+  background: var(--paper);
+  box-shadow:
+    9px 9px 0 -1px var(--paper),
+    9px 9px 0 0 var(--ink);
+  rotate: -1.2deg;
+}
+
+.cardHead,
+.reader,
+.loans th,
+.stamp {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-weight: 500;
+}
+
+.reader {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  margin: clamp(6px, 1.4svh, 14px) 0 0;
+}
+
+.signature {
+  flex: 1;
+  padding: 0 10px;
+  border-bottom: 1px dotted;
+  font-family: var(--font-script);
+  font-size: clamp(30px, 4.4svh, 40px);
+  line-height: 0.8;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.loans {
+  width: 100%;
+  margin-top: clamp(10px, 2svh, 20px);
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.loans th {
+  padding: 7px 12px;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  font-weight: 500;
+  text-align: left;
+}
+
+.loans th:nth-child(-n + 2) {
+  width: 124px;
+}
+
+.loans td {
+  padding: clamp(8px, 1.5svh, 14px) 12px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.loans :is(th, td) + :is(th, td) {
+  border-left: 1px solid var(--rule);
+}
+
+.loans :is(th, td):first-child {
+  padding-left: 0;
+}
+
+.blank td {
+  height: clamp(22px, 3.6svh, 34px);
+  padding: 0;
+}
+
+.blank:last-child td {
+  border-bottom: 0;
+}
+
+.stamped,
+.stamp {
+  filter: url('#formacao-tinta');
+}
+
+.stamped {
+  display: inline-block;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: clamp(13px, 1.05vw, 15px);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  rotate: -3deg;
+}
+
+tr:nth-child(2n) .stamped {
+  rotate: 2deg;
+  translate: 3px 0;
+}
+
+td:nth-child(2) .stamped {
+  rotate: 1.5deg;
+}
+
+.open {
+  display: block;
+  font-family: var(--font-script);
+  font-size: clamp(26px, 3.6svh, 32px);
+  line-height: 0.9;
+  rotate: -4deg;
+}
+
+.open small {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.degree {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(20px, min(1.9vw, 3.6svh), 28px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.description {
+  margin: 4px 0 0;
+  font-size: clamp(12.5px, 0.95vw, 14px);
+  line-height: 1.35;
+}
+
+.description strong {
+  font-weight: 500;
+}
+
+.stamps {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px 22px;
+  max-width: 600px;
+  margin: clamp(-34px, -3.6svh, -18px) -6px 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.stamp {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px 14px 8px;
+  border: 2px solid;
+  outline: 1px solid;
+  outline-offset: 3px;
+  font-size: 9.5px;
+  text-align: center;
+  rotate: -5deg;
+}
+
+.stampName {
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.stamp:nth-child(2) {
+  border-radius: 999px;
+  padding-inline: 26px;
+  rotate: 3deg;
+  translate: 0 10px;
+}
+
+.stamp:nth-child(3) {
+  rotate: -2deg;
+  translate: 0 -4px;
+}
+
+.stamp:nth-child(4) {
+  border-radius: 999px;
+  padding-inline: 26px;
+  rotate: 6deg;
+  translate: 0 8px;
+}
+
+@media (max-width: 900px) {
+  .education {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 84px var(--gutter) 72px;
+  }
+
+  .aside {
+    display: contents;
+  }
+
+  .label {
+    font-size: 11px;
+  }
+
+  .title {
+    margin-top: 10px;
+  }
+
+  .desk {
+    margin-top: 44px;
+  }
+
+  .card {
+    padding: 16px 14px 6px;
+    box-shadow:
+      6px 6px 0 -1px var(--paper),
+      6px 6px 0 0 var(--ink);
+    rotate: -0.8deg;
+  }
+
+  .cardHead,
+  .reader,
+  .loans th {
+    font-size: 10px;
+  }
+
+  .loans th:nth-child(-n + 2) {
+    width: 86px;
+  }
+
+  .loans :is(th, td) {
+    padding-inline: 8px;
+  }
+
+  .stamped {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  .open {
+    font-size: 24px;
+  }
+
+  .open small {
+    font-size: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .degree {
+    font-size: 21px;
+  }
+
+  .stamps {
+    justify-content: center;
+    gap: 18px 20px;
+    max-width: none;
+    margin: 30px 0 0;
+  }
+
+  .languages {
+    order: 1;
+    margin-top: 44px;
+    padding-top: 0;
+  }
+}
