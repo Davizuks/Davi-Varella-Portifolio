@@ -64,7 +64,8 @@ export function Footer() {
 
       <div className={styles.bar}>
         <span>
-          © {CURRENT_YEAR} Davi Varella<span className={styles.craft}> — feito à mão em React</span>
+          © {CURRENT_YEAR} Davi Varella
+          <span className={styles.craft}> — VarellaLabs registrado</span>
         </span>
         <a href="#topo">
           <span className={styles.craft}>Voltar ao </span>topo (↑)
