@@ -73,6 +73,7 @@
 }
 
 .wave {
+  position: relative;
   flex: 1;
   min-height: clamp(96px, 16svh, 420px);
   margin-top: clamp(8px, 3svh, 40px);

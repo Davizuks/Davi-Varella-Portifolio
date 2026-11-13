@@ -52,7 +52,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) 44%;
   gap: 24px;
-  min-height: clamp(104px, 15.5svh, 140px);
+  min-height: clamp(96px, 14.5svh, 140px);
   padding: clamp(16px, 2.9svh, 26px) 0 clamp(18px, 3.3svh, 30px);
   border-top: 1px solid;
 }
