@@ -80,6 +80,8 @@ const INTRO_DONE = TIMELINE.rebuildStart + 2.4
 const SHIP_FALL_GRAVITY = 0.22
 const SHIP_FLOOR_GAP = 48
 const PAUSE_BELOW = 0.5
+const TICK_MS = 1000 / 60
+const MAX_CATCH_UP = 3
 const NOTHING_PRESSED: ShipInput = {
   up: false,
   down: false,
@@ -138,6 +140,7 @@ export function ParticleField({
     let lastDamage = -1
 
     let startedAt = performance.now()
+    let lastFrame = startedAt
     let frameCount = 0
     let frameId = 0
     let running = false
@@ -316,12 +319,14 @@ export function ParticleField({
     const frame = (now: number) => {
       const t = (now - startedAt) / 1000
       const input = controls.current
+      const ticks = Math.min(MAX_CATCH_UP, Math.max(1, Math.round((now - lastFrame) / TICK_MS)))
+      lastFrame = now
 
       if (!playing && t >= TIMELINE.shipArrive) {
         playing = true
         onPlayable?.()
       }
-      flyShip(t, input)
+      for (let tick = 0; tick < ticks; tick++) flyShip(t, input)
 
       currentDamage = playing ? damage(particles, reachY()) : 0
       if (playing && !diving && currentDamage >= WIN_DAMAGE && ship) {
@@ -353,7 +358,9 @@ export function ParticleField({
       }
       for (const p of particles) stepParticle(p, step)
       updateFire(t)
-      impacts.push(...stepBullets(bullets, particles, width, painter.pixel * 5, Math.random))
+      for (let tick = 0; tick < ticks; tick++) {
+        impacts.push(...stepBullets(bullets, particles, width, painter.pixel * 5, Math.random))
+      }
       stepImpacts(impacts)
 
       render(t)
