@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import type { RefObject } from 'react'
 import { prefersReducedMotion } from '@/presentation/utils/motion'
 import {
@@ -50,6 +50,10 @@ function pixelRatio(view: DeskView, scale: number): number {
 }
 
 export function useDeskCanvas({ sectionRef, canvasRef, papers, live }: DeskCanvas): void {
+  const redraw = useRef<() => void>(() => {})
+  const { view, scale } = live.current
+  useEffect(() => redraw.current(), [view, scale])
+
   useEffect(() => {
     const section = sectionRef.current
     const canvas = canvasRef.current
@@ -166,7 +170,8 @@ export function useDeskCanvas({ sectionRef, canvasRef, papers, live }: DeskCanva
         }
       }
       ctx.globalAlpha = 1
-      frameId = requestAnimationFrame(frame)
+      if (reduced) running = false
+      else frameId = requestAnimationFrame(frame)
     }
     const start = () => {
       if (running) return
@@ -182,9 +187,11 @@ export function useDeskCanvas({ sectionRef, canvasRef, papers, live }: DeskCanva
       })
       observer.observe(section)
     }
+    redraw.current = start
     start()
 
     return () => {
+      redraw.current = () => {}
       cancelAnimationFrame(frameId)
       observer?.disconnect()
       section.removeEventListener('pointermove', onPointerMove)
