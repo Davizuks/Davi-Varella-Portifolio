@@ -33,7 +33,7 @@ export const DEFAULT_FREQUENCY = 91.3
 export const CREDITS: readonly { role: string; name: string }[] = [
   { role: 'Escrito e programado por', name: 'Davi Varella' },
   { role: 'Elenco de apoio', name: 'React · TypeScript · Vite · Figma · Cloud Run' },
-  { role: 'Locação', name: 'São Paulo, Brasil' },
+  { role: 'Rodado em', name: 'São Paulo, Brasil' },
 ]
 
 export const stationAt = (frequency: number) =>
