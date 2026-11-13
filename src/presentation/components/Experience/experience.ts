@@ -9,24 +9,24 @@ export type ExperienceEntry = {
 export const EXPERIENCE: readonly ExperienceEntry[] = [
   {
     id: 'folks',
-    period: 'Hoje',
+    period: 'Jul 2026 — Hoje',
     place: 'Folks',
-    role: 'Full Stack Software Engineer',
-    description: 'Back-end em Python para sistemas de saúde e IA.',
+    role: 'AI Software Engineer · Estágio',
+    description: 'Infraestrutura de software e inteligência artificial.',
   },
   {
-    id: 'fecap',
-    period: '2026 — Hoje',
-    place: 'FECAP',
-    role: 'Ciência da Computação',
+    id: 'qi-tech',
+    period: 'Mar 2025 — Dez 2025',
+    place: 'QI Tech',
+    role: 'Software Engineer',
     description:
-      'Projetos interdisciplinares com empresas parceiras, como a Gestão Troca Ticket e o Urban Chase.',
+      'Back-end em Python, APIs REST e integrações para operações financeiras, em sistemas que atendem cerca de 1.000 FIDCs.',
   },
   {
-    id: 'etec',
-    period: 'Até 2024',
-    place: 'Etec',
-    role: 'Ensino técnico',
-    description: 'TCC: Meu Guia Pessoal, um aplicativo para viagens independentes.',
+    id: 'adl',
+    period: 'Out 2023 — Set 2024',
+    place: 'ADL Mineração',
+    role: 'Support Analyst',
+    description: 'Suporte técnico a usuários e manutenção da infraestrutura de TI.',
   },
 ]
