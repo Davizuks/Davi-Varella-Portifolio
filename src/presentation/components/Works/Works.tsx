@@ -243,7 +243,7 @@ export function Works() {
       ref={sectionRef}
       className={styles.works}
       aria-labelledby="trabalhos-titulo"
-      style={{ height: layout.height * stage.scale }}
+      style={{ '--stage-height': `${layout.height * stage.scale}px` } as CSSProperties}
     >
       <div
         className={styles.stage}

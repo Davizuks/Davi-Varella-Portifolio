@@ -4,6 +4,9 @@
   display: flex;
   flex-direction: column;
   min-height: 100svh;
+  min-height: 100lvh;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 100lvh;
   padding: clamp(84px, 11.5svh, 120px) var(--gutter) 24px;
   overflow: hidden;
   background: var(--ink);

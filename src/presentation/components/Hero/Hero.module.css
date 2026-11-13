@@ -12,6 +12,7 @@
     'name    name'
     'scroll  edition';
   min-height: max(520px, 100svh);
+  min-height: max(520px, 100lvh);
   padding: clamp(84px, 24svh, 216px) var(--gutter) 18px;
   overflow: hidden;
   background: var(--ink);
@@ -157,8 +158,9 @@
       '.       .'
       'caption scroll';
     min-height: 100svh;
+    min-height: 100lvh;
     padding-top: calc(var(--game-height, 440px) - min(150px, 17svh));
-    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px) + 100lvh - 100svh);
   }
 
   .name {

@@ -82,7 +82,7 @@ export function useDeskCanvas({ sectionRef, canvasRef, papers, live }: DeskCanva
 
     const onPointerMove = (e: PointerEvent) => {
       if (e.pointerType !== 'mouse') return
-      const rect = section.getBoundingClientRect()
+      const rect = canvas.getBoundingClientRect()
       const { scale } = live.current
       pointer = { x: (e.clientX - rect.left) / scale, y: (e.clientY - rect.top) / scale }
     }
