@@ -22,6 +22,7 @@ import { useStage } from './useStage'
 import styles from './Works.module.css'
 
 const DRAG_THRESHOLD = 5
+const ARROW = '\u2197\uFE0E'
 const SWIPE_STEP = 48
 
 type Drag = {
@@ -337,7 +338,7 @@ export function Works() {
               </p>
               <p className={styles.description}>{focused.description}</p>
               <a className={styles.link} href={focused.url} target="_blank" rel="noreferrer">
-                Abrir projeto <span aria-hidden="true">↗</span>
+                Abrir projeto <span aria-hidden="true">{ARROW}</span>
               </a>
             </div>
             <button

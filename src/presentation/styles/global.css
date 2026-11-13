@@ -32,6 +32,7 @@ body {
   color: var(--paper);
   font-family: var(--font-display);
   -webkit-font-smoothing: antialiased;
+  font-variant-emoji: text;
 }
 
 a {

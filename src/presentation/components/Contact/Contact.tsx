@@ -5,13 +5,15 @@ import styles from './Contact.module.css'
 import { EmailLink } from './EmailLink'
 import { RadioDial } from './RadioDial'
 
+const ARROW = '\u2197\uFE0E'
+
 export function Contact() {
   const [frequency, setFrequency] = useState(DEFAULT_FREQUENCY)
   const listening = useNowPlaying()
   const tuned = stationAt(frequency)
   const readout = (
     <>
-      {tuned?.text} <span aria-hidden="true">↗</span>
+      {tuned?.text} <span aria-hidden="true">{ARROW}</span>
     </>
   )
 
