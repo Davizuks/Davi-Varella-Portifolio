@@ -13,10 +13,12 @@ export function useLanding(sectionRef: RefObject<HTMLElement | null>, onLeave: (
 
   useEffect(() => {
     const section = sectionRef.current
-    if (!section || prefersReducedMotion() || typeof IntersectionObserver === 'undefined') {
+    if (!section || typeof IntersectionObserver === 'undefined') {
       setPhase('settled')
       return
     }
+    const still = prefersReducedMotion()
+    if (still) setPhase('settled')
     let timer = 0
     let waiting = true
     const observer = new IntersectionObserver(
@@ -25,8 +27,8 @@ export function useLanding(sectionRef: RefObject<HTMLElement | null>, onLeave: (
           window.clearTimeout(timer)
           waiting = true
           onLeave()
-          setPhase('waiting')
-        } else if (waiting && entry.intersectionRatio >= LANDING_AT) {
+          if (!still) setPhase('waiting')
+        } else if (!still && waiting && entry.intersectionRatio >= LANDING_AT) {
           waiting = false
           setPhase('landing')
           timer = window.setTimeout(() => setPhase('settled'), LANDING_TIME)
