@@ -3,7 +3,20 @@ import { NAV_ITEMS } from '@/presentation/components/Header/navigation'
 import { PROJECTS } from '@/presentation/components/Works/projects'
 import { Footer } from './Footer'
 
+beforeEach(() => {
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false }))
+})
+afterEach(() => vi.unstubAllGlobals())
+
 describe('Footer', () => {
+  it('shows what is playing right now', async () => {
+    const card = '<div class="artist">Radiohead</div><div class="song">Reckoner</div>'
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, text: async () => card }))
+    render(<Footer />)
+    expect(screen.getByText('Silêncio no momento.')).toBeInTheDocument()
+    expect(await screen.findByText('Reckoner — Radiohead')).toBeInTheDocument()
+  })
+
   it('maps every section of the site', () => {
     render(<Footer />)
     const map = screen.getByRole('navigation', { name: 'Mapa do site' })
