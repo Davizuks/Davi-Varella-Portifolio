@@ -1,4 +1,6 @@
 .footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 420px;
   padding: 0 var(--gutter);
   background: var(--ink);
   color: var(--paper);
