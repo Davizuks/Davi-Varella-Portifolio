@@ -11,14 +11,14 @@ describe('Education', () => {
     )
   })
 
-  it('lists every course with its period, place and degree', () => {
+  it('lists every course with its dates, place and degree', () => {
     render(<Education />)
-    const rows = within(screen.getByRole('list', { name: 'Cursos' })).getAllByRole('listitem')
-    expect(rows).toHaveLength(COURSES.length)
-    COURSES.forEach((course, i) => {
-      expect(within(rows[i]).getByRole('heading', { name: course.place })).toBeInTheDocument()
-      expect(within(rows[i]).getByText(course.period)).toBeInTheDocument()
-      expect(within(rows[i]).getByText(course.degree)).toBeInTheDocument()
+    const table = within(screen.getByRole('table', { name: 'Cursos' }))
+    COURSES.forEach((course) => {
+      const row = within(table.getByRole('heading', { name: course.degree }).closest('tr')!)
+      expect(row.getByText(course.place)).toBeInTheDocument()
+      expect(row.getByText(course.start)).toBeInTheDocument()
+      expect(row.getByText(course.end, { exact: false })).toBeInTheDocument()
     })
   })
 
@@ -28,7 +28,14 @@ describe('Education', () => {
     for (const certificate of CERTIFICATES) {
       expect(certificates.getByText(certificate.name)).toBeInTheDocument()
     }
-    const languages = within(screen.getByRole('list', { name: 'Idiomas' }))
-    expect(languages.getAllByRole('listitem')).toHaveLength(LANGUAGES.length)
+    for (const language of LANGUAGES) {
+      expect(
+        screen.getByText(
+          (_, element) =>
+            element?.tagName === 'DD' &&
+            element.textContent === `${language.name} ${language.level}`,
+        ),
+      ).toBeInTheDocument()
+    }
   })
 })
