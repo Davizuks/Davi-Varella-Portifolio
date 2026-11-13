@@ -21,7 +21,7 @@ export const EXPERIENCE: readonly ExperienceEntry[] = [
     place: 'QI Tech',
     role: 'Software Engineer',
     description:
-      'APIs em Python, PostgreSQL e AWS na área de passivos. Automatizei etapas do ciclo de ofertas públicas e privadas, em sistemas que atendem cerca de 1.000 FIDCs.',
+      'APIs em Python, PostgreSQL e AWS na área de passivos. Automatizei etapas do fluxo de oferta, em sistemas que atendem cerca de 1.000 FIDCs.',
   },
   {
     id: 'adl',
