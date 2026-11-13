@@ -1,7 +1,11 @@
 .experience {
   --aside: 26.47%;
 
-  padding: 104px var(--gutter) 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100svh;
+  padding: clamp(84px, 11.5svh, 104px) var(--gutter) clamp(40px, 9svh, 120px);
   background: var(--paper);
   color: var(--ink);
 }
@@ -28,28 +32,28 @@
 .title {
   margin: 0;
   font-family: var(--font-serif);
-  font-size: clamp(52px, 6.67vw, 96px);
+  font-size: clamp(52px, min(6.67vw, 11svh), 96px);
   font-weight: 400;
   line-height: 0.95;
   letter-spacing: -0.01em;
 }
 
 .list {
-  margin: 114px 0 0;
+  margin: clamp(32px, 10svh, 114px) 0 0;
   padding: 0;
   list-style: none;
 }
 
 .period {
-  padding-top: 34px;
+  padding-top: clamp(24px, 3.8svh, 34px);
 }
 
 .body {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 44%;
   gap: 24px;
-  min-height: 140px;
-  padding: 26px 0 30px;
+  min-height: clamp(104px, 15.5svh, 140px);
+  padding: clamp(16px, 2.9svh, 26px) 0 clamp(18px, 3.3svh, 30px);
   border-top: 1px solid;
 }
 
@@ -79,7 +83,8 @@
 
 @media (max-width: 900px) {
   .experience {
-    padding: 64px var(--gutter) 72px;
+    justify-content: flex-start;
+    padding: 84px var(--gutter) 72px;
   }
 
   .head,

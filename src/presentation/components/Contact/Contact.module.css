@@ -1,8 +1,8 @@
 .contact {
   display: flex;
   flex-direction: column;
-  min-height: 100svh;
-  padding-top: 120px;
+  min-height: calc(100svh - var(--footer-height, 72px));
+  padding-top: clamp(84px, 11.5svh, 120px);
   overflow: hidden;
   background: var(--ink);
   color: var(--paper);
@@ -23,7 +23,7 @@
 
 .title {
   margin: 14px 0 0 calc(var(--gutter) - 10px);
-  font-size: clamp(72px, 11.67vw, 168px);
+  font-size: clamp(72px, min(11.67vw, 19svh), 168px);
   font-weight: 500;
   line-height: 0.9;
   letter-spacing: -0.05em;
@@ -32,7 +32,7 @@
 
 .title em {
   display: block;
-  margin-left: min(18.75vw, 270px);
+  margin-left: 1.6em;
   font-family: var(--font-serif);
   font-weight: 400;
   letter-spacing: -0.02em;
@@ -42,7 +42,7 @@
   display: grid;
   grid-template-columns: minmax(0, 55.9%) minmax(0, 1fr);
   align-items: center;
-  margin-top: 68px;
+  margin-top: clamp(24px, 6svh, 68px);
   padding: 0 var(--gutter);
 }
 
@@ -74,13 +74,15 @@
 
 .wave {
   flex: 1;
-  min-height: clamp(220px, 29vw, 420px);
-  margin-top: 40px;
+  min-height: clamp(96px, 16svh, 420px);
+  margin-top: clamp(8px, 3svh, 40px);
 }
 
 @media (max-width: 900px) {
   .contact {
-    padding-top: 64px;
+    --footer-height: 60px;
+
+    padding-top: 84px;
   }
 
   .label {
@@ -97,6 +99,7 @@
   .title em {
     margin: 8px 0 0 6px;
     font-size: 0.66em;
+    letter-spacing: -0.02em;
     white-space: nowrap;
   }
 
